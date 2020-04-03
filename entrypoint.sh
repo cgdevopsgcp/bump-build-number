@@ -19,7 +19,7 @@ then
     build_number=$(codefresh get annotation pipeline $pipelineid build_number -o json | jq '.value' -j)
     echo '\nCurrent build_number:' $build_number
     new_build_number=$((build_number+1))
-    #expr $build_number + 1
+    
     echo 'Bumped build_number:' $new_build_number
     codefresh create annotation pipeline $pipelineid build_number=$new_build_number 
 else 
