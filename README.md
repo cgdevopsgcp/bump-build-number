@@ -15,7 +15,7 @@ CF_BUILD_ID | Yes | Set this to ${{CF_BUILD_ID}}
 ### Codefresh.yml
 
 ```yaml
-version: '1.0'
+version: '0.1'
 steps:
   BumpVersionNumber:
     title: Bump Version Number
