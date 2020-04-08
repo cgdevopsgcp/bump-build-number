@@ -52,3 +52,5 @@ spec:
       name: bump-build-number
       # Needs to change for final code delivery
       image: fleatbnp/bump-build-number:v0.2.0
+      environment:
+        - 'ANNOTATION_PREFIX=${{ANNOTATION_PREFIX}}'
