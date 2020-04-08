@@ -2,7 +2,7 @@ kind: step-type
 version: '1.0'
 metadata:
   name: brandonphillips/bump-build-number
-  version: 0.1.0
+  version: 0.2.0
   isPublic: false
   description: Bump the pipeline build number
   # Should be updated to https://github.com/codefresh-io/steps/tree/master/incubating/bump-build-number
@@ -51,4 +51,4 @@ spec:
     main:
       name: bump-build-number
       # Needs to change for final code delivery
-      image: fleatbnp/bump-build-number:v0.1.0
+      image: fleatbnp/bump-build-number:v0.2.0

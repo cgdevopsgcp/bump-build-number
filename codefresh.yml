@@ -1,4 +1,4 @@
-version: '1.0'
+version: '0.2.0'
 steps:
   BuildImage:
     title: Building Docker Image
