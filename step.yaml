@@ -1,0 +1,53 @@
+kind: step-type
+version: '0.1.0'
+metadata:
+  name: bump-build-number
+  version: 0.1.0
+  isPublic: true
+  description: Bump the pipeline build number
+  sources:
+    - >-
+      https://github.com/codefresh-io/steps/tree/master/incubating/bump-build-number
+  stage: incubating
+  maintainers:
+    - name: Brandon Phillips
+  categories:
+    - build
+  official: false
+  tags: []
+  icon:
+    type: image
+    size:
+      large:
+        url: >-
+            https://raw.githubusercontent.com/codefresh-plugins/bump-build-number/master/icon.png
+  examples:
+    - description: example-1
+      workflow:
+        BumpBuildNumber:
+          title: Bump Build Version Number
+          type: bump-build-number
+          arguments:
+            CF_BUILD_ID: ${{CF_BUILD_ID}}
+spec:
+  arguments: |-
+    {
+        "definitions": {},
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "patterns": [],
+        "required": [],
+        "properties": {
+            "CF_BUILD_ID": {
+                "type": "string",
+                "description": "The current pipeline build id"
+            }
+        }
+    }
+  steps:
+    main:
+      name: bump-build-number
+      image: codefresh/bump-build-number
+      environment:
+        - 'ANCHORE_CLI_URL=${{CF_BUILD_ID}}'
