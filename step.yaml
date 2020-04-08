@@ -50,6 +50,7 @@ spec:
   steps:
     main:
       name: bump-build-number
-      image: fleatbnp/bump-build-number
+      # Needs to change for final code delivery
+      image: fleatbnp/bump-build-number:v0.1.0
       environment:
         - 'ANCHORE_CLI_URL=${{CF_BUILD_ID}}'
