@@ -30,7 +30,7 @@ metadata:
           title: Bump Build Version Number
           type: bump-build-number
           arguments:
-            CF_BUILD_ID: ${{CF_BUILD_ID}}
+            ANNOTATION_PREFIX: ${{CF_BRANCH}}
 spec:
   arguments: |-
     {
@@ -41,9 +41,9 @@ spec:
         "patterns": [],
         "required": [],
         "properties": {
-            "CF_BUILD_ID": {
+            "ANNOTATION_PREFIX": {
                 "type": "string",
-                "description": "The current pipeline build id"
+                "description": "Add a prefix to the build_number annotation"
             }
         }
     }
@@ -52,5 +52,3 @@ spec:
       name: bump-build-number
       # Needs to change for final code delivery
       image: fleatbnp/bump-build-number:v0.1.0
-      environment:
-        - 'ANCHORE_CLI_URL=${{CF_BUILD_ID}}'

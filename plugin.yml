@@ -13,6 +13,6 @@ maintainers:
     email: brandon@codefresh.io
 icon: https://raw.githubusercontent.com/codefresh-plugins/bump-build-number/master/icon.png
 envs:
-  - name: CF_BUILD_ID
-    type: required
-    description: Set using ${{CF_BUILD_ID}}
+  - name: ANNOTATION_PREFIX
+    type: optional
+    description: Can set a prefix for the build_number annotation
