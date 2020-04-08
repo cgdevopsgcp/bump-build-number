@@ -1,0 +1,12 @@
+version: '0.1.0'
+steps:
+    MyDockerImage:
+        title: Building Docker Image
+        type: build
+        image_name: ${{QA_IMAGE}}
+    BumpBuildNumber:
+        title: Bump Build Version Number
+        image: codefreshplugins/bump-version-number
+        env:
+            - CF_BUILD_ID=${{CF_BUILD_ID}}
+        

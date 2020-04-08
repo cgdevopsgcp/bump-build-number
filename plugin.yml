@@ -1,4 +1,3 @@
-
 title: bump-build-number
 image: codefreshplugins/bump-build-number
 categories:
@@ -6,7 +5,6 @@ categories:
 version: 0.1.0
 description: Bump the current pipeline's build number
 keywords:
-  - docker
   - build
 sources:
   - https://github.com/codefresh-contrib/azure-build
