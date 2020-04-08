@@ -3,7 +3,7 @@ version: '0.1.0'
 metadata:
   name: bump-build-number
   version: 0.1.0
-  isPublic: true
+  isPublic: false
   description: Bump the pipeline build number
   # Should be updated to https://github.com/codefresh-io/steps/tree/master/incubating/bump-build-number
   sources:
