@@ -4,7 +4,7 @@ This step will help you maintain a build number [annotation](https://codefresh.i
 
 ## Prerequisites
 
-- If you want to seed the build number at something other than 1, create a number annotation at the pipeline level with the name build_number and set it appropriately
+- If you want to seed the build number at something other than 1, create an annotation with the name of your choice at the pipeline level and set it appropriately
 
 ## Important Notes
 - Annotations must be deleted from the CLI
