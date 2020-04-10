@@ -1,6 +1,6 @@
 # Codefresh Bump Build Number
 
-This step will help you maintain a build number annotation at the pipeline level. The build number will be updated every time that the step is executed using the codefresh CLI. It is strongly recommended that you add a conditional expression to only increment the build number on a certain branch.
+This step will help you maintain a build number [annotation](https://codefresh.io/docs/docs/codefresh-yaml/annotations/) at the pipeline level. The build number will be updated every time that the step is executed using the codefresh CLI. It is strongly recommended that you add a conditional expression to only increment the build number on a certain branch.
 
 ## Prerequisites
 
