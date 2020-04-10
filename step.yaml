@@ -30,7 +30,7 @@ metadata:
           title: Bump Build Version Number
           type: bump-build-number
           arguments:
-            ANNOTATION_PREFIX: ${{CF_BRANCH}}
+            ANNOTATION_NAME: ${{CF_BRANCH}}_build_number
 spec:
   arguments: |-
     {
@@ -41,9 +41,9 @@ spec:
         "patterns": [],
         "required": [],
         "properties": {
-            "ANNOTATION_PREFIX": {
+            "ANNOTATION_NAME": {
                 "type": "string",
-                "description": "Add a prefix to the build_number annotation"
+                "description": "Override the build_number annotation name"
             }
         }
     }
@@ -53,4 +53,4 @@ spec:
       # Needs to change for final code delivery
       image: fleatbnp/bump-build-number:v0.2.0
       environment:
-        - 'ANNOTATION_PREFIX=${{ANNOTATION_PREFIX}}'
+        - 'ANNOTATION_NAME=${{ANNOTATION_NAME}}'

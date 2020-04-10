@@ -8,5 +8,5 @@ steps:
         title: Bump Build Version Number
         image: codefreshplugins/bump-version-number
         env:
-            - ANNOTATION_PREFIX=${{CF_BRANCH}}
+            - ANNOTATION_NAME=${{CF_BRANCH}}
         
