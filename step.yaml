@@ -4,7 +4,7 @@ metadata:
   name: brandonphillips/bump-build-number
   version: 0.2.0
   isPublic: false
-  description: Bump the pipeline build number
+  description: Bump the build number
   # Should be updated to https://github.com/codefresh-io/steps/tree/master/incubating/bump-build-number
   sources:
     - >-
@@ -18,16 +18,23 @@ metadata:
   tags: []
   icon:
     type: image
+    # Should be updated to https://raw.githubusercontent.com/codefresh-plugins/bump-build-number/master/icon.png
+    url: https://raw.githubusercontent.com/brandonphillips/bump-build-number/master/icon.png
+    background: "#f4f4f4"
     size:
       large:
-        # Should be updated to https://raw.githubusercontent.com/codefresh-plugins/bump-build-number/master/icon.png
         url: >-
-            https://github.com/brandonphillips/bump-build-number/blob/master/icon.png
+          https://raw.githubusercontent.com/brandonphillips/bump-build-number/master/icon.png
   examples:
-    - description: example-1
+    - description: Default Annotation
+      workflow:  
+        BumpBuildNumber:
+          title: Bump default build_number annotation
+          type: bump-build-number
+    - description: Custom Annotation
       workflow:
         BumpBuildNumber:
-          title: Bump Build Version Number
+          title: Bump custom annotation name
           type: bump-build-number
           arguments:
             ANNOTATION_NAME: ${{CF_BRANCH}}_build_number
@@ -50,7 +57,7 @@ spec:
   steps:
     main:
       name: bump-build-number
-      # Needs to change for final code delivery
+      # Needs to change to codefresh repo for final code delivery
       image: fleatbnp/bump-build-number:v0.2.0
       environment:
         - 'ANNOTATION_NAME=${{ANNOTATION_NAME}}'

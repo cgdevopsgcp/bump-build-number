@@ -9,5 +9,5 @@ steps:
     title: Pushing To Registry
     candidate: ${{BuildImage}}
     tags:
-      - "0.1"
+      - "0.2.0"
       - "latest"

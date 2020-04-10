@@ -6,20 +6,24 @@ This step will help you maintain a build number annotation at the pipeline level
 
 - If you want to seed the build number at something other than 1, create a number annotation at the pipeline level with the name build_number and set it appropriately
 
+## Important Notes
+- Annotations must be deleted from the CLI
+- Annotations can be updated in the UI by creating an annotation with the same name and a new value
+
 ### Step arguments
 
 Name|Required|Description
 ---|---|---
-CF_BUILD_ID | Yes | Set this to ${{CF_BUILD_ID}}
+ANNOTATION_NAME | No | Can customize the name of the build number annotation
 
 ### Codefresh.yml
 
 ```yaml
-version: '0.1'
+version: '0.2.0'
 steps:
-  BumpVersionNumber:
-    title: Bump Version Number
-    type: bump
+  BumpBuildNumber:
+    title: Bump Build Number
+    type: bump-build-number
     arguments:
-      CF_BUILD_ID: ${{CF_BUILD_ID}}
+      ANNOTATION_NAME: '${{CF_BRANCH}}'
 ```

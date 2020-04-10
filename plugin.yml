@@ -7,7 +7,7 @@ description: Bump the current pipeline's build number
 keywords:
   - build
 sources:
-  - https://github.com/codefresh-contrib/azure-build
+  - https://github.com/brandonphillips/bump-build-number
 maintainers:
   - name: Brandon Phillips
     email: brandon@codefresh.io
