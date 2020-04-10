@@ -8,7 +8,7 @@ This step will help you maintain a build number annotation at the pipeline level
 
 ## Important Notes
 - Annotations must be deleted from the CLI
-- Annotations can be updated in the UI by creating an annotation with the same name and a new value
+- Annotations can be updated in the UI by creating an annotation with the same name and type with a new value
 
 ### Step arguments
 
