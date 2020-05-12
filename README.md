@@ -21,7 +21,7 @@ ANNOTATION_NAME | No | Can customize the name of the build number annotation
 ### Codefresh.yml
 
 ```yaml
-version: '0.2.0'
+version: '1.0.0'
 steps:
   BumpBuildNumber:
     title: Bump Build Number

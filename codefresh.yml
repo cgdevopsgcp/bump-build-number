@@ -1,13 +1,11 @@
-version: '0.2.0'
+version: '1.0'
 steps:
   BuildImage:
     title: Building Docker Image
     type: build
-    image_name: codefreshplugins/bump-version-number
+    image_name: codefreshplugins/bump-build-number
   PushingToRegistry:
     type: push
     title: Pushing To Registry
     candidate: ${{BuildImage}}
-    tags:
-      - "0.2.0"
-      - "latest"
+    tags: [ "latest", "1.0.0" ]

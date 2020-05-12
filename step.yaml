@@ -1,14 +1,13 @@
 kind: step-type
 version: '1.0'
 metadata:
-  name: codefreshdemo/bump-build-number
-  version: 0.2.0
-  isPublic: false
+  name: bump-build-number
+  version: 1.0.0
+  isPublic: true
   description: Bump the build number
-  # Should be updated to https://github.com/codefresh-io/steps/tree/master/incubating/bump-build-number
   sources:
     - >-
-      https://github.com/brandonphillips/bump-build-number
+      https://github.com/codefresh-io/steps/tree/master/incubating/bump-build-number
   stage: incubating
   maintainers:
     - name: Brandon Phillips
@@ -18,13 +17,12 @@ metadata:
   tags: []
   icon:
     type: image
-    # Should be updated to https://raw.githubusercontent.com/codefresh-plugins/bump-build-number/master/icon.png
-    url: https://raw.githubusercontent.com/brandonphillips/bump-build-number/master/icon.png
+    url: https://raw.githubusercontent.com/codefresh-io/steps/master/incubating/bump-build-number/icon.png
     background: "#f4f4f4"
     size:
       large:
         url: >-
-          https://raw.githubusercontent.com/brandonphillips/bump-build-number/master/icon.png
+          https://raw.githubusercontent.com/codefresh-io/steps/master/incubating/bump-build-number/icon.png
   examples:
     - description: Default Annotation Name
       workflow:  
@@ -57,7 +55,6 @@ spec:
   steps:
     main:
       name: bump-build-number
-      # Needs to change to codefresh repo for final code delivery
-      image: fleatbnp/bump-build-number:v0.2.0
+      image: codefreshplugins/bump-build-number
       environment:
         - 'ANNOTATION_NAME=${{ANNOTATION_NAME}}'

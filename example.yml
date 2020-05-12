@@ -1,12 +1,8 @@
-version: '0.2.0'
+version: '1.0'
 steps:
-    MyDockerImage:
-        title: Building Docker Image
-        type: build
-        image_name: ${{QA_IMAGE}}
     BumpBuildNumber:
         title: Bump Build Version Number
-        image: codefreshplugins/bump-version-number
-        env:
+        image: codefreshplugins/bump-build-number
+        environment:
             - ANNOTATION_NAME=${{CF_BRANCH}}
         
