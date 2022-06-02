@@ -181,7 +181,7 @@ steps:
     right: ']]'
   stepsTemplate: |-
     first:
-        image: codefresh/cli
+        image: docker.io/codefresh/cli
         commands:
         [[- $cmd := (printf "codefresh run \"%s\" -d" .Arguments.PIPELINE_ID ) -]]
         [[ if .Arguments.TRIGGER_ID ]]
