@@ -15,7 +15,7 @@ steps:
     title: Building Docker Image
     type: build
     image_name: codefreshplugins/bump-build-number 
-    working_directory: ${{clone}}
+    working_directory: bump-build-number
     dockerfile: Dockerfile
     tag: develop
   bump-build-number:
