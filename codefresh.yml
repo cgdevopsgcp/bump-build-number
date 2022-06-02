@@ -1,6 +1,6 @@
 version: '1.0'
 steps:
-  main_clone:
+  checkout:
     title: Cloning main repository...
     stage: checkout
     type: git-clone
