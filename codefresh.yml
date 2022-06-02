@@ -1,22 +1,246 @@
 version: '1.0'
 stages:
-  - checkout
-  - build   
-  - push
+ - clone
+ - build   
+ - codefresh-run
 steps:
-  checkout:
-    title: Cloning main repository...
-    stage: checkout
-    type: git-clone
-    repo: 'cgdevopsgcp/bump-build-number'
-    revision: master
-    git: github
-  BuildImage:
-    title: Building Docker Image
-    type: build
-    image_name: codefreshplugins/bump-build-number
-  PushingToRegistry:
-    type: push
-    title: Pushing To Registry
-    candidate: ${{BuildImage}}
-    tags: [ "latest", "1.0.0" ]
+ checkout:
+  title: Cloning main repository...
+  stage: checkout
+  type: git-clone
+  repo: 'cgdevopsgcp/bump-build-number'
+  revision: master
+  git: github
+ BuildImage:
+  title: Building Docker Image
+  type: build
+  image_name: codefreshplugins/bump-build-number
+  working_directory: '${{CLONE}}'
+  dockerfile: "Dockerfile"
+  stage: "build"
+ codefresh-run:
+  name: codefresh-run
+  title: Run a Codefresh pipeline
+  version: 1.2.5
+  isPublic: true
+  description: Run a Codefresh pipeline by ID or name and attach the created build logs.
+  sources:
+    - 'https://github.com/codefresh-io/steps/tree/master/graduated/codefresh-run'
+  stage: graduated
+  maintainers:
+    - name: Itai Gendler
+      email: itai@codefresh.io
+  categories:
+    - featured
+  official: true
+  tags: []
+  icon:
+    type: svg
+    url: >-
+      https://cdn.jsdelivr.net/gh/codefresh-io/steps/graduated/codefresh-run/icon-1.svg
+    background: '#C7DCFF'
+  examples:
+    - description: example-1
+      workflow:
+        codefresh-run:
+          title: Run a codefresh pipeline
+          type: codefresh-run
+          arguments:
+            PIPELINE_ID: project-name/pip_name
+            TRIGGER_ID: trigger_id
+            BRANCH: '${{CF_BRANCH}}'
+            SHA: '${{CF_REVISION}}'
+            VARIABLE:
+              - key1=val1
+              - key2=val2
+  created_at: '2019-12-24T15:42:47.178Z'
+  updated_at: '2019-12-24T15:42:47.178Z'
+  latest: true
+  id: 5e0231f76e1ebe58d5d37a37
+ spec:
+  arguments: |-
+    {
+        "definitions": {},
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "patterns": [],
+        "required": [
+            "PIPELINE_ID"
+        ],
+        "properties": {
+            "PIPELINE_ID": {
+                "type": "string",
+                "description": "Pipeline name or id"
+            },
+            "TRIGGER_ID": {
+                "type": "string",
+                "description": "Trigger id or name",
+                "default": ""
+            },
+            "BRANCH": {
+                "type": "string",
+                "description": "Branch",
+                "examples": ["master"],
+                "default": ""
+            },
+            "SHA": {
+                "type": "string",
+                "description": "Set commit sha",
+                "examples": ["c777d850ff67969cb4eb9e041d7edeb367705e12"],
+                "default": ""
+            },
+            "NO_CACHE": {
+                "type": "boolean",
+                "description": "Ignore cached images",
+                "default": false
+            },
+            "NO_CF_CACHE": {
+                   "type": "boolean",
+                   "description": "Ignore Codefresh cache optimizations",
+                   "default": false
+               },
+            "ENABLE_NOTIFICATIONS": {
+                "type": "boolean",
+                "description": "Report notifications about pipeline execution",
+                "default": false
+            },
+            "RESET_VOLUME": {
+                  "type": "boolean",
+                  "description": "Reset pipeline cached volume",
+                  "default": false
+            },
+            "RUNTIME_NAME": {
+                "type": "string",
+                "description": "Runtime environment to run the pipeline",
+                "examples": ["my-runtime-name"],
+                "default": ""
+            },
+            "DETACH": {
+                 "type": "boolean",
+                 "description": "Run pipeline and print build ID",
+                 "default": false
+             },
+            "FOLLOW_LOGS": {
+                 "type": "boolean",
+                 "description": "Run pipeline and follow its logs",
+                 "default": true
+             },
+            "CONTEXT": {
+                 "type": "array",
+                 "items": {
+                     "type": "string"
+                 },
+                 "description": "Run pipeline with contexts",
+                 "examples": ["git-context-1"],
+                 "default": []
+             },
+            "VARIABLE": {
+                 "type": "array",
+                 "items": {
+                     "type": "string"
+                 },
+                 "description": "Set build variables",
+                 "examples": ["key=val"],
+                 "default": []
+             },
+            "VARIABLE_FILE": {
+                  "type": "string",
+                  "description": "Set build variables from a file",
+                  "examples": ["/codefresh/volume/my-repo/var_file_example.yml"],
+                  "default": ""
+            },             
+            "TIMEOUT_MINS": {
+                "type": "string",
+                "description": "Timeout in mins",
+                "examples": ["33.3", "45"],
+                "default": "45"
+            },
+            "ONLY": {
+                  "type": "array",
+                  "items": {
+                      "type": "string"
+                  },
+                  "description": "run only specifc steps",
+                  "examples": ["step1", "step2"],
+                  "default": []
+              },
+            "SKIP": {
+                  "type": "array",
+                  "items": {
+                      "type": "string"
+                  },
+                  "description": "skip specifc steps",
+                  "examples": ["step1", "step2"],
+                  "default": []
+              }
+        }
+    }
+  delimiters:
+    left: '[['
+    right: ']]'
+  stepsTemplate: |-
+    first:
+        image: quay.io/codefresh/cli
+        commands:
+        [[- $cmd := (printf "codefresh run \"%s\" -d" .Arguments.PIPELINE_ID ) -]]
+        [[ if .Arguments.TRIGGER_ID ]]
+            [[- $cmd = (printf "%s -t %s" $cmd .Arguments.TRIGGER_ID) -]]
+        [[- end -]]
+        [[ if .Arguments.BRANCH ]]
+            [[- $cmd = (printf "%s -b %s" $cmd .Arguments.BRANCH) -]]
+        [[- end -]]
+        [[ if .Arguments.SHA ]]
+            [[- $cmd = (printf "%s -s %s" $cmd .Arguments.SHA) -]]
+        [[- end -]]
+        [[ if .Arguments.NO_CACHE ]]
+            [[- $cmd = (printf "%s --no-cache" $cmd) -]]
+        [[- end -]]
+        [[ if .Arguments.NO_CF_CACHE ]]
+            [[- $cmd = (printf "%s --no-cf-cache" $cmd) -]]
+        [[- end -]]
+        [[ if .Arguments.ENABLE_NOTIFICATIONS ]]
+            [[- $cmd = (printf "%s --enable-notifications" $cmd) -]]
+        [[- end -]]
+        [[ if .Arguments.RESET_VOLUME ]]
+            [[- $cmd = (printf "%s --reset-volume" $cmd) -]]
+        [[- end -]]
+        [[ if .Arguments.RUNTIME_NAME ]]
+            [[- $cmd = (printf "%s --runtime-name %s" $cmd .Arguments.RUNTIME_NAME) -]]
+        [[- end -]]    
+        [[ range .Arguments.VARIABLE ]]
+            [[- $cmd = (printf "%s --variable %s" $cmd .) -]]
+        [[- end -]]
+        [[ if .Arguments.VARIABLE_FILE ]]
+            [[- $cmd = (printf "%s --var-file %s" $cmd .Arguments.VARIABLE_FILE) -]]
+        [[- end -]]        
+        [[ range .Arguments.CONTEXT ]]
+            [[- $cmd = (printf "%s --context %s" $cmd .) -]]
+        [[- end -]]
+        [[ range .Arguments.ONLY ]]
+            [[- $cmd = (printf "%s --only %s" $cmd .) -]]
+        [[- end -]]
+        [[ range .Arguments.SKIP ]]
+            [[- $cmd = (printf "%s --skip %s" $cmd .) -]]
+        [[- end ]]
+
+        [[/* Multiline string is required to support usage of 'colon' (:) character in the string. For example in the pipeline name. */]]
+        [[/* Otherwise after template render there is a chance to have an object instead of a string. */]]
+          - >-
+            export BUILD_ID=$([[ $cmd ]]); if [ -z "$BUILD_ID" ]; then exit 1; fi
+          - cf_export first_CF_OUTPUT_URL="${{CF_URL}}/build/$BUILD_ID"
+          - cf_export BUILD_ID
+      [[- if eq .Arguments.DETACH false ]]
+    second:
+      name: step1
+      image: quay.io/codefresh/cli
+      commands:
+        - export BUILD_ID=${{steps.first.output.BUILD_ID}}
+      [[- if eq .Arguments.FOLLOW_LOGS true ]]
+        - echo "Retrieving logs for build $BUILD_ID"
+        - codefresh logs -f --no-timestamps $BUILD_ID
+      [[- end ]]
+        - codefresh wait --verbose $BUILD_ID --timeout [[(printf "%s"  .Arguments.TIMEOUT_MINS)]]
+      [[- end -]]
+
+     
