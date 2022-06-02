@@ -6,7 +6,7 @@ stages:
 steps:
  checkout:
   title: Cloning main repository...
-  stage: checkout
+  stage: clone
   type: git-clone
   repo: 'cgdevopsgcp/bump-build-number'
   revision: master
@@ -26,7 +26,7 @@ steps:
   description: Run a Codefresh pipeline by ID or name and attach the created build logs.
   sources:
     - 'https://github.com/codefresh-io/steps/tree/master/graduated/codefresh-run'
-  stage: graduated
+  stage: codefresh-run
   maintainers:
     - name: Itai Gendler
       email: itai@codefresh.io
