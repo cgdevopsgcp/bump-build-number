@@ -18,6 +18,13 @@ steps:
     working_directory: "${{clone}}"
     dockerfile: "Dockerfile"
     tag: develop
+  
+  PushingToRegistry:
+    type: push
+    title: Pushing To Registry
+    candidate: ${{BuildImage}}
+    tags: [ "latest", "1.0.0" ]
+    
   bump-build-number:
     title: Bump Build Version Number
     type: bump-build-number
