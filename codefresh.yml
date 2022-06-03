@@ -4,7 +4,7 @@ stages:
   - build   
   - bump-build-number
 steps:
-  main_clone:
+  clone:
     title: Cloning main repository...
     stage: clone
     type: git-clone
