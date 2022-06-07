@@ -27,7 +27,7 @@ steps:
     
   bump-build-number:
     title: Bump Build Version Number
-    type: bump-build-number
+    type: freestyle
     image: codefreshplugins/bump-build-number
     environment:
         - ANNOTATION_NAME=${{CF_BRANCH}}
