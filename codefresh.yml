@@ -17,7 +17,7 @@ steps:
     image_name: cgcodefresh/bump-build-number 
     working_directory: "${{clone}}"
     dockerfile: "Dockerfile"
-    tag: v3
+    tag: v4
   
   PushingToRegistry:
     type: push
